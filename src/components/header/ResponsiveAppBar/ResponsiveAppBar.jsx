@@ -24,12 +24,9 @@ const handleLogout = () => {
   updateAuthStateLogout();
 };
 
-
-
-const pages = [
-  { title: "Home", path: "/" },
-];
+const pages = [{ title: "Home", path: "/" }];
 const settings = [
+  { title: "Profile", path: "/users/profile", handle: null },
   { title: "Logout", path: "/", handle: handleLogout },
 ];
 

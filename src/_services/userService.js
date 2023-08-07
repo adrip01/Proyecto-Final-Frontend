@@ -63,4 +63,34 @@ userService.getMyCardsTasks = async (token) => {
   return response.data;
 };
 
+userService.createCard = async (token, data) => {
+  const options = {
+    method: "POST",
+    url: `${global.BASE_API_URL}/users/create-card`,
+    data: data,
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  // await sleep(2000); // TODO
+  const response = await axios.request(options);
+  return response.data;
+};
+
+userService.getTypes = async (token) => {
+  const options = {
+    method: "GET",
+    url: `${global.BASE_API_URL}/users/types`,
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  //await sleep(2000); // TODO
+  const response = await axios.request(options);
+  return response.data;
+};
+
 export default userService;

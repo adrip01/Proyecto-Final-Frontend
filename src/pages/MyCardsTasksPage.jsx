@@ -73,7 +73,7 @@ function MyCardsTasksPage() {
                       sx={{
                         textTransform: "uppercase",
                         fontWeight: "bold",
-                        fontSize: 24,
+                        fontSize: 20,
                       }}
                     >
                       {userCards.title}

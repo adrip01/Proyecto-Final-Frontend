@@ -33,4 +33,20 @@ userService.getProfile = async (token) => {
   return response.data;
 };
 
+userService.saveProfile = async (token, user) => {
+  const options = {
+    method: "POST",
+    url: `${global.BASE_API_URL}/users/update-profile`,
+    data: user,
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  // await sleep(2000); // TODO
+  const response = await axios.request(options);
+  return response.data;
+};
+
 export default userService;

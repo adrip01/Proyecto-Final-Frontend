@@ -27,6 +27,7 @@ const handleLogout = () => {
 const pages = [{ title: "Home", path: "/" }];
 const settings = [
   { title: "Profile", path: "/users/profile", handle: null },
+  { title: "My Cards", path: "/users/my-cards-tasks", handle: null },
   { title: "Logout", path: "/", handle: handleLogout },
 ];
 

@@ -11,6 +11,9 @@ import RegisterPage from "./pages/RegisterPage";
 import AdminPage from "./pages/AdminPage";
 import ProfilePage from "./pages/ProfilePage";
 import AccountPage from "./pages/AccountPage";
+import MyCardsTasksPage from "./pages/MyCardsTasksPage";
+import NewCardPage from "./pages/NewCardPage";
+import NewTaskPage from "./pages/NewTaskPage";
 
 export default function Router() {
   return (
@@ -22,6 +25,10 @@ export default function Router() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/users/profile" element={<ProfilePage />} />
         <Route path="/users/account" element={<AccountPage />} />
+        <Route path="/users/my-cards-tasks" element={<MyCardsTasksPage />} />
+        <Route path="/users/new-card" element={<NewCardPage />} />
+        <Route path="/users/new-task" element={<NewTaskPage />} />
+
         <Route path="/404" element={<Page404 />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>

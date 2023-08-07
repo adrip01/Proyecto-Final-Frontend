@@ -49,4 +49,18 @@ userService.saveProfile = async (token, user) => {
   return response.data;
 };
 
+userService.getMyCardsTasks = async (token) => {
+  const options = {
+    method: "GET",
+    url: `${global.BASE_API_URL}/users/user-cards-tasks`,
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  //await sleep(2000); // TODO
+  const response = await axios.request(options);
+  return response.data;
+};
+
 export default userService;

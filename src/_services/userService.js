@@ -93,4 +93,19 @@ userService.getTypes = async (token) => {
   return response.data;
 };
 
+userService.deleteCard = async (token, id) => {
+  const options = {
+    method: "DELETE",
+    url: `${global.BASE_API_URL}/users/delete-card/${id}`,
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  // await sleep(2000); // TODO
+  const response = await axios.request(options);
+  return response.data;
+};
+
 export default userService;

@@ -9,9 +9,11 @@ import {
   Button,
   Container,
   CssBaseline,
+  FormControl,
   FormControlLabel,
   Grid,
   IconButton,
+  InputLabel,
   MenuItem,
   Select,
   Stack,
@@ -67,6 +69,10 @@ function NewCardPage() {
     console.log(formValues);
   }, []);
 
+  useEffect(() => {
+    getTypes();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues((oldState) => {
@@ -105,6 +111,13 @@ function NewCardPage() {
       title: data.get("title"),
       category: data.get("category"),
     });
+    if (!formValues.title.trim()) {
+      setError("Title cannot be empty."); //TODO
+    } else {
+      setError(null);
+      setFormValues(formValues);
+      createCard(formValues);
+    }
   };
 
   const redirect = () => {
@@ -179,11 +192,11 @@ function NewCardPage() {
             }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid>
                 <Stack direction="column" spacing={2}></Stack>
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <Stack direction="column" spacing={2}>
                   <TextField
                     required
@@ -219,15 +232,26 @@ function NewCardPage() {
                     </Tooltip>
                   </Box>
                   {formValues.category == "resettable" && (
-                    <Select
-                      required
-                      fullWidth
-                      id="type_id"
-                      label="Reset timer"
-                      name="type_id"
-                      value={formValues.type_id}
-                      onChange={handleChange}
-                    />
+                    <FormControl>
+                      <InputLabel id="labelSelectType">Reset type</InputLabel>
+                      <Select
+                        // required
+                        fullWidth
+                        id="type_id"
+                        labelId="labelSelectType"
+                        label="Reset type"
+                        name="type_id"
+                        value={formValues.type_id}
+                        onChange={handleChange}
+                        aria-labelledby="labelSelectType"
+                      >
+                        {types.map((types) => (
+                          <MenuItem key={types.id} value={types.id}>
+                            {`${types.type}`}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                   )}
                 </Stack>
               </Grid>

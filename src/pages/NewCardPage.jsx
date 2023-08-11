@@ -62,6 +62,7 @@ function NewCardPage() {
       setFormValues((oldState) => ({
         ...oldState,
         user_id: userInfo.userId,
+        type_id: 4,
         category: "not_resettable",
         is_completed: "no",
       }));
@@ -207,52 +208,6 @@ function NewCardPage() {
                     value={formValues.title}
                     onChange={handleChange}
                   />
-                  <Box>
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          onChange={(e) => {
-                            handleChange({
-                              target: {
-                                name: "category",
-                                value: e.target.checked
-                                  ? "resettable"
-                                  : "not_resettable",
-                              },
-                            });
-                          }}
-                        />
-                      }
-                      label="Resettable"
-                    />
-                    <Tooltip title="Resettable will uncheck the completed tasks automatically every selected time">
-                      <IconButton>
-                        <HelpOutlineIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                  </Box>
-                  {formValues.category == "resettable" && (
-                    <FormControl>
-                      <InputLabel id="labelSelectType">Reset type</InputLabel>
-                      <Select
-                        // required
-                        fullWidth
-                        id="type_id"
-                        labelId="labelSelectType"
-                        label="Reset type"
-                        name="type_id"
-                        value={formValues.type_id}
-                        onChange={handleChange}
-                        aria-labelledby="labelSelectType"
-                      >
-                        {types.map((types) => (
-                          <MenuItem key={types.id} value={types.id}>
-                            {`${types.type}`}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
                 </Stack>
               </Grid>
             </Grid>

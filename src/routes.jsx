@@ -27,8 +27,7 @@ export default function Router() {
         <Route path="/users/account" element={<AccountPage />} />
         <Route path="/users/my-cards-tasks" element={<MyCardsTasksPage />} />
         <Route path="/users/new-card" element={<NewCardPage />} />
-        <Route path="/users/new-task" element={<NewTaskPage />} />
-
+        <Route path="/users/new-task/:id" element={<NewTaskPage />} />
         <Route path="/404" element={<Page404 />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>

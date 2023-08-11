@@ -19,6 +19,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  Checkbox,
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import userService from "../_services/userService";
@@ -29,6 +30,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
+import RemoveIcon from "@mui/icons-material/Remove";
+import ChecklistIcon from "@mui/icons-material/Checklist";
 
 function MyCardsTasksPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,19 +39,23 @@ function MyCardsTasksPage() {
   const [userCardsTasks, setUserCardsTasks] = useState([]);
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [cardId, setCardId] = useState(null);
+  const [taskId, setTaskId] = useState(null);
+  const [deleteType, setDeleteType] = useState(null);
   const navigate = useNavigate();
 
-  const [menu, setMenu] = useState({});
-  const open = Boolean(menu);
+  const [anchorEl, setAnchorEl] = useState({});
+  const open = Boolean(anchorEl);
+
+  const [hoveredTask, setHoveredTask] = useState(null);
 
   const handleOpenMenu = (event, cardId) => {
-    setMenu((oldState) => ({
+    setAnchorEl((oldState) => ({
       ...oldState,
       [cardId]: event.currentTarget,
     }));
   };
   const handleCloseMenu = (cardId) => {
-    setMenu((oldState) => ({
+    setAnchorEl((oldState) => ({
       ...oldState,
       [cardId]: null,
     }));
@@ -73,13 +80,24 @@ function MyCardsTasksPage() {
 
   const handleDeleteCard = (id) => {
     setCardId(id);
+    setDeleteType("card");
+    setOpenConfirmation(true);
+  };
+
+  const handleDeleteTask = (id) => {
+    setTaskId(id);
+    setDeleteType("task");
     setOpenConfirmation(true);
   };
 
   const handleConfirmDelete = async () => {
     setOpenConfirmation(false);
     try {
-      await userService.deleteCard(token, cardId);
+      if (deleteType == "card") {
+        await userService.deleteCard(token, cardId);
+      } else if (deleteType == "task") {
+        await userService.deleteTask(token, taskId);
+      }
       getMyCardsTasks();
     } catch (error) {
       console.log(error);
@@ -110,9 +128,9 @@ function MyCardsTasksPage() {
       </Box>
       {userCardsTasks.length > 0 ? (
         <Grid container>
-          <Grid item xs={12} sm={6} md={4}>
-            {userCardsTasks.map((userCards) => (
-              <Card sx={{ mx: 1.5, my: 1.5 }} key={userCards.id}>
+          {userCardsTasks.map((userCards) => (
+            <Grid item xs={12} sm={6} md={4} key={userCards.id}>
+              <Card sx={{ mx: 1.5, my: 1.5 }}>
                 <CardContent>
                   <Box
                     sx={{
@@ -145,8 +163,8 @@ function MyCardsTasksPage() {
                     </IconButton>
                     <Menu
                       id={`basic-menu-${userCards.id}`}
-                      menu={menu[userCards.id]}
-                      open={Boolean(menu[userCards.id])}
+                      anchorEl={anchorEl[userCards.id]}
+                      open={Boolean(anchorEl[userCards.id])}
                       onClose={() => handleCloseMenu(userCards.id)}
                       MenuListProps={{
                         "aria-labelledby": `basic-button-${userCards.id}`,
@@ -178,8 +196,37 @@ function MyCardsTasksPage() {
                   <List>
                     {userCards.tasks.length > 0 ? (
                       userCards.tasks.map((task) => (
-                        <ListItem key={task.id}>
+                        <ListItem
+                          key={task.id}
+                          sx={{
+                            "&:hover": {
+                              backgroundColor: "#f5f5f5",
+                              "& .hovered-icons": {
+                                visibility: "visible",
+                              },
+                            },
+                            position: "relative",
+                          }}
+                          onMouseEnter={() => setHoveredTask(task.id)}
+                          onMouseLeave={() => setHoveredTask(null)}
+                        >
+                          <ListItemIcon>
+                            <Checkbox></Checkbox>
+                          </ListItemIcon>
                           <ListItemText primary={task.description} />
+                          {hoveredTask == task.id && (
+                            <ListItemIcon className="hovered-icons">
+                              <EditIcon fontSize="small" />
+                            </ListItemIcon>
+                          )}
+                          {hoveredTask == task.id && (
+                            <ListItemIcon
+                              className="hovered-icons"
+                              onClick={() => handleDeleteTask(task.id)}
+                            >
+                              <DeleteIcon fontSize="small" />
+                            </ListItemIcon>
+                          )}
                         </ListItem>
                       ))
                     ) : (
@@ -190,7 +237,7 @@ function MyCardsTasksPage() {
                   </List>
                   <NavLink
                     style={{ textDecoration: "none" }}
-                    to="/users/new-task"
+                    to={`/users/new-task/${userCards.id}`}
                   >
                     <IconButton>
                       <AddIcon></AddIcon>
@@ -198,8 +245,8 @@ function MyCardsTasksPage() {
                   </NavLink>
                 </CardContent>
               </Card>
-            ))}
-          </Grid>
+            </Grid>
+          ))}
         </Grid>
       ) : (
         <ListItem>
@@ -211,11 +258,14 @@ function MyCardsTasksPage() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Delete this card?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {deleteType == "card" ? "Delete this card?" : "Delete this task?"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this card? There's no going back if
-            you do.
+            {deleteType == "card"
+              ? "Are you sure you want to delete this card and all its tasks? There's no going back if you do."
+              : "Are you sure you want to delete this task? There's no going back if you do."}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

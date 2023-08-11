@@ -97,7 +97,7 @@ function NewCardPage() {
     }
   };
 
-  //para ver los cambios de valor de los inputs
+  //para ver los cambios de valor de los inputs TODO
   useEffect(() => {
     console.log("formValues changed:", formValues);
   }, [formValues]);

@@ -105,7 +105,7 @@ function NewTaskPage() {
   //-----------------
 
   const handleSubmit = (event) => {
-    event.preventDefault(); //TODO wtf es prevent default
+    event.preventDefault(); //TODO es prevent default
     const data = new FormData(event.currentTarget);
 
     console.log({
@@ -232,7 +232,6 @@ function NewTaskPage() {
                   {formValues.target_timer == "yes" && (
                     <Stack direction="column" spacing={2}>
                       <TextField
-                        // required
                         fullWidth
                         id="limit_date"
                         label="Limit date"
@@ -248,7 +247,6 @@ function NewTaskPage() {
                       />
 
                       <TextField
-                        // required
                         fullWidth
                         id="limit_time"
                         label="Limit time"

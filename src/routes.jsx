@@ -14,6 +14,7 @@ import AccountPage from "./pages/AccountPage";
 import MyCardsTasksPage from "./pages/MyCardsTasksPage";
 import NewCardPage from "./pages/NewCardPage";
 import NewTaskPage from "./pages/NewTaskPage";
+import EditCardPage from "./pages/EditCardPage";
 
 export default function Router() {
   return (
@@ -28,6 +29,7 @@ export default function Router() {
         <Route path="/users/my-cards-tasks" element={<MyCardsTasksPage />} />
         <Route path="/users/new-card" element={<NewCardPage />} />
         <Route path="/users/new-task/:id" element={<NewTaskPage />} />
+        <Route path="/users/edit-card/:id" element={<EditCardPage />} />
         <Route path="/404" element={<Page404 />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>

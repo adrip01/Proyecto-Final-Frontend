@@ -78,6 +78,10 @@ function MyCardsTasksPage() {
     }
   };
 
+  const handleEditCard = (id) => {
+    navigate(`/users/edit-card/${id}`);
+  };
+
   const handleDeleteCard = (id) => {
     setCardId(id);
     setDeleteType("card");
@@ -170,13 +174,10 @@ function MyCardsTasksPage() {
                         "aria-labelledby": `basic-button-${userCards.id}`,
                       }}
                     >
-                      <MenuItem onClick={handleCloseMenu}>
-                        <ListItemIcon>
-                          <VisibilityIcon fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText>Details</ListItemText>
-                      </MenuItem>
-                      <MenuItem onClick={handleCloseMenu}>
+                      <MenuItem
+                        id={`menu-item-${userCards.id}-edit`}
+                        onClick={() => handleEditCard(userCards.id)}
+                      >
                         <ListItemIcon>
                           <EditIcon fontSize="small" />
                         </ListItemIcon>

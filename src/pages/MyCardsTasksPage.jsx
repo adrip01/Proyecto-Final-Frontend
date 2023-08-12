@@ -33,6 +33,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 
+import { format } from "date-fns";
+
+import { Masonry } from "@mui/lab";
+
 function MyCardsTasksPage() {
   const [isLoading, setIsLoading] = useState(true);
   const token = useSelector((state) => state.auth.token);
@@ -82,6 +86,10 @@ function MyCardsTasksPage() {
     navigate(`/users/edit-card/${id}`);
   };
 
+  const handleEditTask = (id) => {
+    navigate(`/users/edit-task/${id}`);
+  };
+
   const handleDeleteCard = (id) => {
     setCardId(id);
     setDeleteType("card");
@@ -112,6 +120,31 @@ function MyCardsTasksPage() {
     setOpenConfirmation(false);
   };
 
+  const handleTaskCheck = async (cardId, taskId) => {
+    try {
+      // find card and task
+      const card = userCardsTasks.find((userCard) => userCard.id === cardId);
+      if (card) {
+        const task = card.tasks.find((task) => task.id === taskId);
+        if (task) {
+          // task state
+          task.is_completed = task.is_completed === "yes" ? "no" : "yes";
+          setUserCardsTasks([...userCardsTasks]);
+
+          // save task
+          try {
+            await userService.saveTask(token, task, taskId);
+          } catch (error) {
+            console.log(error);
+            setUserCardsTasks([...userCardsTasks]);
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <Box style={{ width: "100%" }}>
       <Box
@@ -131,9 +164,9 @@ function MyCardsTasksPage() {
         </NavLink>
       </Box>
       {userCardsTasks.length > 0 ? (
-        <Grid container>
+        <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={2}>
           {userCardsTasks.map((userCards) => (
-            <Grid item xs={12} sm={6} md={4} key={userCards.id}>
+            <Box key={userCards.id}>
               <Card sx={{ mx: 1.5, my: 1.5 }}>
                 <CardContent>
                   <Box
@@ -212,11 +245,43 @@ function MyCardsTasksPage() {
                           onMouseLeave={() => setHoveredTask(null)}
                         >
                           <ListItemIcon>
-                            <Checkbox></Checkbox>
+                            <Checkbox
+                              checked={task.is_completed === "yes"}
+                              onChange={() =>
+                                handleTaskCheck(userCards.id, task.id)
+                              }
+                            />
                           </ListItemIcon>
-                          <ListItemText primary={task.description} />
+                          <ListItemText
+                            primary={task.description}
+                            secondary={
+                              (task.limit_date
+                                ? format(
+                                    new Date(task.limit_date),
+                                    "yyyy-MM-dd"
+                                  )
+                                : "") +
+                              (task.limit_time
+                                ? " at " +
+                                  format(
+                                    new Date(`1970-01-01T${task.limit_time}`),
+                                    "HH:mm"
+                                  ) +
+                                  "h"
+                                : "")
+                            }
+                            className={
+                              task.is_completed === "yes"
+                                ? "completed-task"
+                                : ""
+                            }
+                          />
+
                           {hoveredTask == task.id && (
-                            <ListItemIcon className="hovered-icons">
+                            <ListItemIcon
+                              className="hovered-icons"
+                              onClick={() => handleEditTask(task.id)}
+                            >
                               <EditIcon fontSize="small" />
                             </ListItemIcon>
                           )}
@@ -246,9 +311,9 @@ function MyCardsTasksPage() {
                   </NavLink>
                 </CardContent>
               </Card>
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Masonry>
       ) : (
         <ListItem>
           <ListItemText primary="There is nothing here. Create some new cards." />

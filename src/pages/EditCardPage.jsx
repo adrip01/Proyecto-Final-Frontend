@@ -41,6 +41,7 @@ function EditCardPage() {
   const { id } = useParams();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [initialTitle, setInitialTitle] = useState("");
 
   useEffect(() => {
     getCard();
@@ -56,22 +57,12 @@ function EditCardPage() {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      type_id: data.get("type_id"),
-      title: data.get("title"),
-      category: data.get("category"),
-      is_completed: data.get("is_completed"),
-    });
-  };
-
   const getCard = async () => {
     setIsLoading(true);
     try {
       const data = await userService.getCard(token, id);
       setCard(data.card);
+      setInitialTitle(data.card.title);
       setFormValues({
         type_id: data.card.type_id,
         title: data.card.title,
@@ -143,14 +134,12 @@ function EditCardPage() {
           >
             <Box sx={{ mt: 1, mb: 4 }}>
               <Typography component="h1" variant="h5">
-                {`Card: ${formValues.title}`}
+                {`Card: ${initialTitle}`}
               </Typography>
             </Box>
 
             <Box
               component="form"
-              noValidate
-              onSubmit={handleSubmit}
               sx={{
                 mt: 5,
                 p: 3,

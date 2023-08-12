@@ -74,18 +74,6 @@ function AccountPage() {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      user_name: data.get("user_name"),
-      first_name: data.get("first_name"),
-      last_name: data.get("last_name"),
-      email: data.get("email"),
-      birthday: data.get("birthday"),
-    });
-  };
-
   const getProfile = async () => {
     setIsLoading(true);
     try {
@@ -172,8 +160,6 @@ function AccountPage() {
 
             <Box
               component="form"
-              noValidate
-              onSubmit={handleSubmit}
               sx={{
                 mt: 5,
                 p: 3,

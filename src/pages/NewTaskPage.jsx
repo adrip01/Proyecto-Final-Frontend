@@ -44,7 +44,7 @@ let initialFormValues = {
 
 function NewTaskPage() {
   const { id } = useParams();
-  const [user, setUser] = useState({});
+  const [card, setCard] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [error, setError] = useState(null);
@@ -73,6 +73,7 @@ function NewTaskPage() {
 
   useEffect(() => {
     getTypes();
+    getCard();
   }, []);
 
   const handleChange = (e) => {
@@ -98,31 +99,25 @@ function NewTaskPage() {
     }
   };
 
+  const getCard = async () => {
+    setIsLoading(true);
+    try {
+      const data = await userService.getCard(token, id);
+      setCard(data.card);
+      console.log(data.card);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   //para ver los cambios de valor de los inputs TODO
   useEffect(() => {
     console.log("formValues changed:", formValues);
-  }, [formValues]);
+    console.log("card changed:", card);
+  }, [formValues, card]);
   //-----------------
-
-  const handleSubmit = (event) => {
-    event.preventDefault(); //TODO es prevent default
-    const data = new FormData(event.currentTarget);
-
-    console.log({
-      description: data.get("type_id"),
-      target_timer: data.get("target_timer"),
-      limit_date: data.get("limit_date"),
-      limit_time: data.get("limit_time"),
-      category: data.get("category"),
-    });
-    if (!formValues.description.trim()) {
-      setError("Description cannot be empty."); //TODO
-    } else {
-      setError(null);
-      setFormValues(formValues);
-      createTask(formValues);
-    }
-  };
 
   const redirect = () => {
     navigate("/users/my-cards-tasks");
@@ -130,21 +125,26 @@ function NewTaskPage() {
 
   const createTask = async () => {
     setIsLoading(true);
-    try {
-      const data = await userService.createTaskForCard(token, formValues, id);
-      console.log(data);
-      setSuccess(true);
-      setTimeout(dismissAlert, 5000);
-      setTimeout(redirect, 5000);
-    } catch (error) {
-      console.log(error);
-      setError(error.response.data.message);
-      console.log("userInfo:", userInfo); //TODO borrar los conole.log
-      console.log("initialFormValues:", initialFormValues);
-      console.log("formValues:", formValues);
-      setTimeout(dismissAlert, 5000);
-    } finally {
+    const descriptionTrim = formValues.description.trim();
+    if (descriptionTrim.length == 0) {
+      setError("Description cannot be empty.");
       setIsLoading(false);
+      setTimeout(dismissAlert, 5000);
+    } else {
+      try {
+        const data = await userService.createTaskForCard(token, formValues, id);
+        console.log(data);
+        setSuccess(true);
+      } catch (error) {
+        console.log(error);
+        setError(error.response.data.message);
+        console.log("userInfo:", userInfo); //TODO borrar los conole.log
+        console.log("initialFormValues:", initialFormValues);
+        console.log("formValues:", formValues);
+        setTimeout(dismissAlert, 5000);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -178,14 +178,12 @@ function NewTaskPage() {
         >
           <Box sx={{ mt: 1, mb: 4 }}>
             <Typography component="h1" variant="h5">
-              {`NewTaskPage task for card`} //TODO
+              {`New task for card ${card.title}`}
             </Typography>
           </Box>
 
           <Box
             component="form"
-            noValidate
-            onSubmit={handleSubmit}
             sx={{
               mt: 5,
               p: 3,
@@ -272,7 +270,7 @@ function NewTaskPage() {
                   to="/users/my-cards-tasks"
                 >
                   <Button type="button" variant="contained" sx={{ mt: 3 }}>
-                    Cancel
+                    go back
                   </Button>
                 </NavLink>
                 <Button

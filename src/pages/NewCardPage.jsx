@@ -103,45 +103,32 @@ function NewCardPage() {
   }, [formValues]);
   //-----------------
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    console.log({
-      type_id: data.get("type_id"),
-      title: data.get("title"),
-      category: data.get("category"),
-    });
-    if (!formValues.title.trim()) {
-      setError("Title cannot be empty."); //TODO
-    } else {
-      setError(null);
-      setFormValues(formValues);
-      createCard(formValues);
-    }
-  };
-
   const redirect = () => {
     navigate("/users/my-cards-tasks");
   };
 
   const createCard = async () => {
     setIsLoading(true);
-    try {
-      const data = await userService.createCard(token, formValues);
-      console.log(data);
-      setSuccess(true);
-      setTimeout(dismissAlert, 5000);
-      setTimeout(redirect, 5000);
-    } catch (error) {
-      console.log(error);
-      setError(error.response.data.message);
-      console.log("userInfo:", userInfo);
-      console.log("initialFormValues:", initialFormValues);
-      console.log("formValues:", formValues);
-      setTimeout(dismissAlert, 5000);
-    } finally {
+    const titleTrim = formValues.title.trim();
+    if (titleTrim.length == 0) {
+      setError("Title cannot be empty.");
       setIsLoading(false);
+      setTimeout(dismissAlert, 5000);
+    } else {
+      try {
+        const data = await userService.createCard(token, formValues);
+        console.log(data);
+        setSuccess(true);
+      } catch (error) {
+        console.log(error);
+        setError(`${error.response.data.message}: title already exists`);
+        console.log("userInfo:", userInfo);
+        console.log("initialFormValues:", initialFormValues);
+        console.log("formValues:", formValues);
+        setTimeout(dismissAlert, 5000);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -161,7 +148,7 @@ function NewCardPage() {
       {success && (
         <Alert severity="success">
           <AlertTitle>Succes</AlertTitle>
-          Appointment created successfully!
+          Card created successfully!
         </Alert>
       )}
       <Container component="main" maxWidth="md">
@@ -181,8 +168,6 @@ function NewCardPage() {
 
           <Box
             component="form"
-            noValidate
-            onSubmit={handleSubmit}
             sx={{
               mt: 5,
               p: 3,
@@ -218,7 +203,7 @@ function NewCardPage() {
                   to="/users/my-cards-tasks"
                 >
                   <Button type="button" variant="contained" sx={{ mt: 3 }}>
-                    Cancel
+                    go back
                   </Button>
                 </NavLink>
                 <Button

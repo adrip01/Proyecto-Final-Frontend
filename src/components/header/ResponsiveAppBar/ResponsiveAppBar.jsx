@@ -12,8 +12,9 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import { NavLink } from "react-router-dom";
-import { Divider } from "@mui/material";
+import { Divider, ThemeProvider, createTheme } from "@mui/material";
 
 import "./ResponsiveAppBar.module.scss";
 import { updateAuthStateLogout } from "../../../features/authentication/updateAuthState";
@@ -24,7 +25,10 @@ const handleLogout = () => {
   updateAuthStateLogout();
 };
 
-const pages = [{ title: "Home", path: "/" }];
+const pages = [
+  { title: "Home", path: "/" },
+  { title: "About Us", path: "/" },
+];
 const settings = [
   { title: "Profile", path: "/users/profile", handle: null },
   { title: "My Cards", path: "/users/my-cards-tasks", handle: null },
@@ -55,10 +59,10 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" color={isAdmin ? "error" : "primary"}>
+    <AppBar position="static" color={isAdmin ? "primary" : "primary"}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AccessibilityNewIcon
+          <AutoStoriesIcon
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
           <Typography
@@ -75,7 +79,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            MyApp
+            JournApp
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -120,7 +124,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AccessibilityNewIcon
+          <AutoStoriesIcon
             sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
           />
           <Typography
@@ -138,7 +142,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            MyApp
+            JournApp
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -167,9 +171,8 @@ function ResponsiveAppBar() {
                   sx={{
                     my: 2,
                     mr: 1,
-                    color: "white",
-                    bgcolor: "primary.dark",
                   }}
+                  color="secondary"
                 >
                   Login
                 </Button>
@@ -182,9 +185,8 @@ function ResponsiveAppBar() {
                   //startIcon={<AppRegistrationTwoToneIcon />}
                   sx={{
                     my: 2,
-                    color: "white",
-                    bgcolor: "primary.dark",
                   }}
+                  color="secondary"
                 >
                   Sign Up
                 </Button>
@@ -197,7 +199,7 @@ function ResponsiveAppBar() {
               <NavLink style={{ textDecoration: "none" }} to="/admin">
                 <Button
                   variant="contained"
-                  startIcon={<AccessibilityNewIcon />}
+                  startIcon={<AutoStoriesIcon />}
                   color="warning"
                   sx={{
                     my: 2,

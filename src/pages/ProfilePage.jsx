@@ -70,7 +70,6 @@ export default function ProfilePage() {
     <>
       <Box
         sx={{
-          backgroundColor: "#E3E3E3",
           minHeight: "100vh",
           display: "flex",
           alignItems: "center",

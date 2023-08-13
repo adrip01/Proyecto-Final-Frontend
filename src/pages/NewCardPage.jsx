@@ -138,7 +138,7 @@ function NewCardPage() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <Box>
       {error && (
         <Alert severity="error">
           <AlertTitle>Error</AlertTitle>
@@ -169,6 +169,7 @@ function NewCardPage() {
           <Box
             component="form"
             sx={{
+              backgroundColor: "white",
               mt: 5,
               p: 3,
               borderRadius: 4,
@@ -202,11 +203,17 @@ function NewCardPage() {
                   style={{ textDecoration: "none" }}
                   to="/users/my-cards-tasks"
                 >
-                  <Button type="button" variant="contained" sx={{ mt: 3 }}>
+                  <Button
+                    type="button"
+                    variant="contained"
+                    sx={{ mt: 3 }}
+                    color="secondary"
+                  >
                     go back
                   </Button>
                 </NavLink>
                 <Button
+                  color="secondary"
                   type="button"
                   variant="contained"
                   sx={{ mt: 3 }}
@@ -221,7 +228,7 @@ function NewCardPage() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </Box>
   );
 }
 export default NewCardPage;

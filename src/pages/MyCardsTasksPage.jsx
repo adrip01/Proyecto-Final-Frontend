@@ -158,7 +158,7 @@ function MyCardsTasksPage() {
       >
         <Typography variant="h4">Your cards and tasks</Typography>
         <NavLink style={{ textDecoration: "none" }} to="/users/new-card">
-          <Button type="button" variant="contained">
+          <Button type="button" variant="contained" color="secondary">
             New Card
           </Button>
         </NavLink>
@@ -234,7 +234,7 @@ function MyCardsTasksPage() {
                           key={task.id}
                           sx={{
                             "&:hover": {
-                              backgroundColor: "#f5f5f5",
+                              backgroundColor: "#E0E0E0",
                               "& .hovered-icons": {
                                 visibility: "visible",
                               },
@@ -246,6 +246,7 @@ function MyCardsTasksPage() {
                         >
                           <ListItemIcon>
                             <Checkbox
+                              color="secondary"
                               checked={task.is_completed === "yes"}
                               onChange={() =>
                                 handleTaskCheck(userCards.id, task.id)

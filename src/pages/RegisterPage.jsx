@@ -10,7 +10,13 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Alert, AlertTitle, IconButton, InputAdornment } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  IconButton,
+  InputAdornment,
+  Paper,
+} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 
@@ -34,10 +40,15 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const credentials = {
-      user_name: data.get("user_name"),
-      email: data.get("email"),
-      password: data.get("password"),
+      user_name: data.get("user_name").trim(),
+      email: data.get("email").trim(),
+      password: data.get("password").trim(),
     };
+    
+    if (user_name.length === 0 || email.length === 0 || password.length === 0) {
+      setError("Please fill in all required fields");
+      return;
+    }
     register(credentials);
   };
 
@@ -53,7 +64,7 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <Box>
       {error && (
         <Alert severity="error">
           <AlertTitle>Error</AlertTitle>
@@ -77,7 +88,7 @@ export default function SignUp() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+            <LockOutlinedIcon color="primary" />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -91,6 +102,7 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  sx={{ backgroundColor: "#FFFFFF", borderRadius: "5px" }}
                   autoComplete="given-name"
                   name="user_name"
                   required
@@ -102,6 +114,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  sx={{ backgroundColor: "#FFFFFF", borderRadius: "5px" }}
                   required
                   fullWidth
                   id="email"
@@ -112,6 +125,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  sx={{ backgroundColor: "#FFFFFF", borderRadius: "5px" }}
                   required
                   fullWidth
                   name="password"
@@ -142,6 +156,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              color="secondary"
             >
               Create account
             </Button>
@@ -155,6 +170,6 @@ export default function SignUp() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </Box>
   );
 }

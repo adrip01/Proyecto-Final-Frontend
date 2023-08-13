@@ -6,14 +6,20 @@ import "@fontsource/roboto/700.css";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./routes.jsx";
 import Header from "./components/header/Header";
+import { ThemeProvider } from "@mui/material/styles";
+import { lightTheme, darkTheme } from "./customTheme";
 
 function App() {
+  const customTheme = lightTheme;
+
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        <AppRouter />
-      </BrowserRouter>
+      <ThemeProvider theme={customTheme}>
+        <BrowserRouter>
+          <Header />
+          <AppRouter />
+        </BrowserRouter>
+      </ThemeProvider>
     </>
   );
 }

@@ -119,7 +119,7 @@ function AccountPage() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <Box>
       {error && (
         <Alert severity="error">
           <AlertTitle>Error</AlertTitle>
@@ -134,7 +134,6 @@ function AccountPage() {
       )}
       <Box
         sx={{
-          backgroundColor: "#E3E3E3",
           minHeight: "100vh",
           display: "flex",
         }}
@@ -161,13 +160,13 @@ function AccountPage() {
             <Box
               component="form"
               sx={{
+                backgroundColor: "#FFFFFF",
                 mt: 5,
                 p: 3,
                 borderRadius: 4,
                 border: "1px solid #e8e8e8",
                 boxShadow:
                   "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-                backgroundColor: "#FBFBFD",
               }}
             >
               <Grid container spacing={2}>
@@ -235,11 +234,17 @@ function AccountPage() {
                     style={{ textDecoration: "none" }}
                     to="/users/profile"
                   >
-                    <Button type="button" variant="contained" sx={{ mt: 3 }}>
+                    <Button
+                      type="button"
+                      variant="contained"
+                      sx={{ mt: 3 }}
+                      color="secondary"
+                    >
                       Cancel
                     </Button>
                   </NavLink>
                   <Button
+                    color="secondary"
                     type="button"
                     variant="contained"
                     startIcon={<SaveRoundedIcon />}
@@ -256,7 +261,7 @@ function AccountPage() {
           </Box>
         </Container>
       </Box>
-    </ThemeProvider>
+    </Box>
   );
 }
 export default AccountPage;

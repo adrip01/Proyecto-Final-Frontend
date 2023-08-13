@@ -72,7 +72,7 @@ export default function SignInSide() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <Box>
       {error && (
         <Alert severity="error">
           <AlertTitle>Error</AlertTitle>
@@ -99,7 +99,7 @@ export default function SignInSide() {
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} elevation={6}>
           <Box
             sx={{
               my: 8,
@@ -110,7 +110,7 @@ export default function SignInSide() {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
+              <LockOutlinedIcon color="primary" />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
@@ -122,6 +122,7 @@ export default function SignInSide() {
               sx={{ mt: 1 }}
             >
               <TextField
+                sx={{ backgroundColor: "#FFFFFF", borderRadius: "5px" }}
                 margin="normal"
                 required
                 fullWidth
@@ -132,6 +133,7 @@ export default function SignInSide() {
                 autoFocus
               />
               <TextField
+                sx={{ backgroundColor: "#FFFFFF", borderRadius: "5px" }}
                 margin="normal"
                 required
                 fullWidth
@@ -160,6 +162,7 @@ export default function SignInSide() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                color="secondary"
               >
                 Sign in
               </Button>
@@ -174,6 +177,6 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </Box>
   );
 }

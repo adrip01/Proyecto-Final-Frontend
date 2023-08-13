@@ -5,7 +5,7 @@
   <ol>
     <li><a href="#objetivo-🎯">Objetivo</a></li>
     <li><a href="#sobre-el-proyecto-🔎">Sobre el proyecto</a></li>
-    <!-- <li><a href="#deploy-🚀">Deploy</a></li> -->
+    <li><a href="#deploy-🚀">Deploy</a></li>
     <li><a href="#stack">Stack</a></li>
     <li><a href="#instalación-en-local">Instalación</a></li>
     <li><a href="#vistas">Vistas</a></li>
@@ -24,10 +24,10 @@ Este proyecto requería conexión a una API funcional y usar React para crear un
 
 Se trata del frontend de una app tipo To Do List donde los ususarios pueden registrarse y acceder a los servicios de la app, como consultar sus tareas, crear, modificar o eliminarlas y cambiar sus datos de usuario. Pueden crear tarjetas y distribuir sus tareas en ellas, las tareas pueden contar con una fecha y hora objetivo, además se pueden marcar o desmarcar como completadas.
 
-<!-- ## Deploy 🚀
+## Deploy 🚀
 <div align="center">
-    <a href="https://www.google.com"><strong>Url a producción </strong></a>🚀🚀🚀
-</div> -->
+    <a href="https://master.d3tzewqho4jyf4.amplifyapp.com/">⭐⭐⭐<strong>Url a producción </strong></a>⭐⭐⭐
+</div>
 
 ## Stack
 

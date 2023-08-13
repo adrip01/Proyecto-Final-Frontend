@@ -28,7 +28,6 @@ userService.getProfile = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  //await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -42,7 +41,6 @@ userService.getCard = async (token, id) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  //await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -58,7 +56,6 @@ userService.saveProfile = async (token, user) => {
     },
   };
 
-  // await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -74,7 +71,6 @@ userService.saveCard = async (token, card, id) => {
     },
   };
 
-  // await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -89,7 +85,6 @@ userService.saveTask = async (token, task, id) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  // await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -103,7 +98,6 @@ userService.getMyCardsTasks = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  //await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -119,7 +113,6 @@ userService.createCard = async (token, data) => {
     },
   };
 
-  // await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -135,7 +128,6 @@ userService.createTaskForCard = async (token, data, id) => {
     },
   };
 
-  // await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -149,7 +141,6 @@ userService.getTypes = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  //await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -163,7 +154,6 @@ userService.getCard = async (token, id) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  //await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -177,7 +167,6 @@ userService.getTask = async (token, id) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  //await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -192,7 +181,6 @@ userService.deleteCard = async (token, id) => {
     },
   };
 
-  // await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };
@@ -207,7 +195,6 @@ userService.deleteTask = async (token, id) => {
     },
   };
 
-  // await sleep(2000); // TODO
   const response = await axios.request(options);
   return response.data;
 };

@@ -24,11 +24,10 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-//
+
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 
-//
 import userService from "../_services/userService";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 
@@ -120,10 +119,10 @@ function EditTaskPage() {
   };
 
   //para ver los cambios de valor de los inputs TODO
-  useEffect(() => {
-    console.log("task state updated:", task);
-    console.log("formValues state updated:", formValues);
-  }, [task, formValues]);
+  // useEffect(() => {
+  //   console.log("task state updated:", task);
+  //   console.log("formValues state updated:", formValues);
+  // }, [task, formValues]);
 
   return (
     <Box>

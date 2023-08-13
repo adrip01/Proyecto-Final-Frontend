@@ -167,7 +167,6 @@ function ResponsiveAppBar() {
                 <Button
                   variant="contained"
                   size="small"
-                  // startIcon={<LoginTwoToneIcon />}
                   sx={{
                     my: 2,
                     mr: 1,
@@ -182,7 +181,6 @@ function ResponsiveAppBar() {
                 <Button
                   variant="contained"
                   size="small"
-                  //startIcon={<AppRegistrationTwoToneIcon />}
                   sx={{
                     my: 2,
                   }}

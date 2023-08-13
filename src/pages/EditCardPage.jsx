@@ -99,10 +99,10 @@ function EditCardPage() {
   };
 
   //para ver los cambios de valor de los inputs TODO
-  useEffect(() => {
-    console.log("Card state updated:", card);
-    console.log("formValues state updated:", formValues);
-  }, [card, formValues]);
+  // useEffect(() => {
+  //   console.log("Card state updated:", card);
+  //   console.log("formValues state updated:", formValues);
+  // }, [card, formValues]);
 
   return (
     <Box>

@@ -113,10 +113,10 @@ function NewTaskPage() {
   };
 
   //para ver los cambios de valor de los inputs TODO
-  useEffect(() => {
-    console.log("formValues changed:", formValues);
-    console.log("card changed:", card);
-  }, [formValues, card]);
+  // useEffect(() => {
+  //   console.log("formValues changed:", formValues);
+  //   console.log("card changed:", card);
+  // }, [formValues, card]);
   //-----------------
 
   const redirect = () => {

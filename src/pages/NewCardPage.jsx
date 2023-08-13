@@ -98,9 +98,9 @@ function NewCardPage() {
   };
 
   //para ver los cambios de valor de los inputs TODO
-  useEffect(() => {
-    console.log("formValues changed:", formValues);
-  }, [formValues]);
+  // useEffect(() => {
+  //   console.log("formValues changed:", formValues);
+  // }, [formValues]);
   //-----------------
 
   const redirect = () => {

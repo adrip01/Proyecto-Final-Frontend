@@ -57,13 +57,13 @@ Se trata del frontend de una app tipo To Do List donde los ususarios pueden regi
 Home
 <img src="./public/img/homePage.png">
 Register
-<img src="./public/img/SignUp.png">
+<img src="./public/img/signup.png">
 Login
-<img src="./public/img/Login.png">
+<img src="./public/img/login.png">
 Profile
-<img src="./public/img/Profile.png">
+<img src="./public/img/profile.png">
 Account
-<img src="./public/img/Account.png">
+<img src="./public/img/account.png">
 My Cards
 <img src="./public/img/cardsTasks.png">
 

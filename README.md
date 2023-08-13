@@ -54,8 +54,8 @@ Se trata del frontend de una app tipo To Do List donde los ususarios pueden regi
 
 ## Vistas
 
-Landing
-<img src="./public/img/home.png">
+Home
+<img src="./public/img/homePage.png">
 Register
 <img src="./public/img/SignUp.png">
 Login
@@ -64,10 +64,8 @@ Profile
 <img src="./public/img/Profile.png">
 Account
 <img src="./public/img/Account.png">
-My appointments
-<img src="./public/img/MyAppointments.png">
-New appointment
-<img src="./public/img/NewAppointment.png">
+My Cards
+<img src="./public/img/cardsTasks.png">
 
 ## Credenciales
 
@@ -85,12 +83,12 @@ New appointment
           password: 12345678
   ```
 
-  Como admin:
+  <!-- Como admin:
 
   ```js
           email: admin@admin.com,
           password: 12345678
-  ```
+  ``` -->
 
   </details>
 

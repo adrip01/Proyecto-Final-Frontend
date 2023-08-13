@@ -16,12 +16,14 @@ import NewCardPage from "./pages/NewCardPage";
 import NewTaskPage from "./pages/NewTaskPage";
 import EditCardPage from "./pages/EditCardPage";
 import EditTaskPage from "./pages/EditTaskPage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 export default function Router() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/about-us" element={<AboutUsPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
